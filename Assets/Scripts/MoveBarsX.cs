@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,8 @@ public class MoveBarsX : MonoBehaviour
 
     private bool dragging;
 
-    Vector2 initialPos;
+    //Vector2 initialPos;
+    Vector3 pos;
 
     public static bool isMoving;
 
@@ -42,10 +43,13 @@ public class MoveBarsX : MonoBehaviour
         //Si el usuario arrastra la barra
         if (dragging)
         {
-            //Movimiento sobre eje  X
-            move += Input.GetAxis("Mouse X") * .2f;
-            transform.localPosition = new Vector3(move, gameObject.transform.position.y, gameObject.transform.position.z);
-
+           //Movimiento sobre eje Y, funciona mejor en computadora
+           // move += Input.GetAxis("Mouse X") * .2f;
+           // transform.localPosition = new Vector3(move, gameObject.transform.position.y, gameObject.transform.position.z);
+            
+            //Movimiento sobre eje Y, recomendado para celular
+            pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.localPosition = new Vector3(pos.x, gameObject.transform.position.y, gameObject.transform.position.z);
         }
     }
 
